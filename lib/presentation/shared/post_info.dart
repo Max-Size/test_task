@@ -20,10 +20,6 @@ class PostInfo extends StatelessWidget {
           post.title,
           style: TextStyles.title,
         ),
-        Image.asset('assets/images/hqdefault.jpg'),
-        const SizedBox(
-          height: 20,
-        ),
         Text(
           post.body,
           style: TextStyles.normal,
