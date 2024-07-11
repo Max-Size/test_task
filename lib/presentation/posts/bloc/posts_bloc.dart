@@ -12,8 +12,12 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
   PostsBloc() : super(PostsLoading()) {
     on<GetPosts>((event, emit) async {
       emit(PostsLoading());
-      final data = await _postsRepository.getAllPosts();
-      emit(PostsData(posts: data));
+      try {
+        final data = await _postsRepository.getAllPosts();
+        emit(PostsData(posts: data));
+      } catch (e) {
+        emit(PostsError());
+      }
     });
   }
 }

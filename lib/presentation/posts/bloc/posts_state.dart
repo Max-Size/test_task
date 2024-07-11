@@ -5,6 +5,8 @@ sealed class PostsState {}
 
 final class PostsLoading extends PostsState {}
 
+final class PostsError extends PostsState {}
+
 final class PostsData extends PostsState {
   final List<Post> posts;
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:posts/presentation/main/widgets/shimmered_box.dart';
+import 'package:posts/presentation/posts/widgets/shimmered_box.dart';
 
 class LoadingPostsList extends StatelessWidget {
   const LoadingPostsList({super.key});

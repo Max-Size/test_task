@@ -15,21 +15,25 @@ class PostDetailsBloc extends Bloc<PostDetailsEvent, PostDetailsState> {
   PostDetailsBloc() : super(PostDetailsLoading()) {
     on<GetPostDetails>((event, emit) async {
       emit(PostDetailsLoading());
-      final savedResult =
-          await _localCommentsRepo.getSavedCommentsForPost(event.post.id);
-      if (savedResult != null) {
-        emit(PostDetailsData(
-          comments: savedResult.comments.comments,
-          post: event.post,
-        ));
-      } else {
-        final data =
-            await _commentsRepository.getCommentsForPost(event.post.id);
-        emit(PostDetailsData(
-          comments: data,
-          post: event.post,
-        ));
-        _localCommentsRepo.saveCommentsForPost(data);
+      try {
+        final savedResult =
+            await _localCommentsRepo.getSavedCommentsForPost(event.post.id);
+        if (savedResult != null) {
+          emit(PostDetailsData(
+            comments: savedResult.comments.comments,
+            post: event.post,
+          ));
+        } else {
+          final data =
+              await _commentsRepository.getCommentsForPost(event.post.id);
+          emit(PostDetailsData(
+            comments: data,
+            post: event.post,
+          ));
+          _localCommentsRepo.saveCommentsForPost(data);
+        }
+      } catch (e) {
+        emit(PostDetailsError());
       }
     });
   }

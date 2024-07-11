@@ -5,6 +5,8 @@ sealed class PostDetailsState {}
 
 final class PostDetailsLoading extends PostDetailsState {}
 
+final class PostDetailsError extends PostDetailsState {}
+
 final class PostDetailsData extends PostDetailsState {
   final Post post;
   final List<Comment> comments;
